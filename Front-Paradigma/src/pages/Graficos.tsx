@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 
-// Define la interfaz para los datos de la API
+
 interface DashboardData {
   id: string;
   Costos: string;
@@ -11,9 +11,9 @@ interface DashboardData {
 }
 
 const Graficos = () => {
-  const [data, setData] = useState<DashboardData[]>([]);  // Define el estado con el tipo correcto
+  const [data, setData] = useState<DashboardData[]>([]);  
 
-  // Fetch de los datos de MockAPI
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
