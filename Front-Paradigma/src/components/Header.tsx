@@ -17,7 +17,7 @@ const Header = () => {
             Dashboards
           </Link>
           <Link to="/graficos" className="nav-link">
-            Gráficos
+            Transacciones
           </Link>
         </nav>
       </div>
