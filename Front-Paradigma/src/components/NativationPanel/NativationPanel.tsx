@@ -6,7 +6,7 @@ const NavigationPanel = () => {
   return (
     <div className="flex justify-center space-x-8 my-8">
       <button
-        className="bg-blue-500 text-white px-6 py-3 rounded shadow hover:bg-blue-600"
+        className="bg-blue-700 text-white px-6 py-3 rounded shadow hover:bg-blue-800"
         onClick={() => navigate("/dashboards")} 
       >
         Ver Gráficas
