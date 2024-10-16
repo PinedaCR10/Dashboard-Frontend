@@ -1,15 +1,16 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter, } from 'react-router-dom';
 import Home from './pages/Home';
 import { Charts } from './pages/Charts';
 import { Dashboard } from './pages/Dashboard';
 import ProtectedRoute from './routes/ProtectedRoute';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import RootRedirect from './routes/RootRedirect';
 
 export const router = createBrowserRouter([
   {
-    path: '/', // Redirige a login si es la ruta raíz
-    element: <Navigate to="/login" replace />,
+    path: '/', 
+    element: <RootRedirect />,
   },
   {
     path: '/login',
@@ -44,5 +45,3 @@ export const router = createBrowserRouter([
     ),
   },
 ]);
-
-

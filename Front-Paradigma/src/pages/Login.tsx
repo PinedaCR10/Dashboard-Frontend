@@ -1,29 +1,26 @@
 import { useState } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { useAuth } from '../routes/AuthContext';
+import { useNavigate, Link } from 'react-router-dom'; // Se eliminó useLocation ya que no es necesario
+import { useAuthContext } from '../routes/AuthContext';
 
 const Login = () => {
-  const { login } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation(); // Captura la ruta previa
-  const from = location.state?.from?.pathname || '/home'; // Ruta previa o Home por defecto
+  const { login } = useAuthContext(); // Usamos el hook del contexto
+  const navigate = useNavigate(); // Para redirigir al usuario
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [usuario, setUsuario] = useState('');
+  const [contraseña, setContraseña] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!username || !password) {
-      setError('Todos los campos son obligatorios');
-      return;
+    try {
+      // Intentamos iniciar sesión con los valores proporcionados
+      await login(usuario, contraseña);
+      
+      // Redirigimos al usuario al home tras el login exitoso
+      navigate('/home', { replace: true }); 
+    } catch (err) {
+      setError('Credenciales inválidas');
     }
-    if (password.length < 6) {
-      setError('La contraseña debe tener al menos 6 caracteres');
-      return;
-    }
-    login(); // Simulamos el login exitoso
-    navigate(from, { replace: true }); // Redirige a la ruta previa o Home
   };
 
   return (
@@ -37,8 +34,8 @@ const Login = () => {
             <input
               type="text"
               className="w-full px-4 py-2 border rounded"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
               required
             />
           </div>
@@ -47,8 +44,8 @@ const Login = () => {
             <input
               type="password"
               className="w-full px-4 py-2 border rounded"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={contraseña}
+              onChange={(e) => setContraseña(e.target.value)}
               required
             />
           </div>

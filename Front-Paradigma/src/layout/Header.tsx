@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaBars, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
-import { useAuth } from '../routes/AuthContext';
+import { useAuthContext } from '../routes/AuthContext'; // Cambia useAuth por useAuthContext
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout } = useAuthContext(); // Usar useAuthContext
   const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);

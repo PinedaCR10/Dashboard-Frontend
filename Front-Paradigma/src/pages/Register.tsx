@@ -1,53 +1,27 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { UserType}  from '../types/UserType';
-
+import { useAuthContext } from '../routes/AuthContext';
+import { UserType } from '../types/authTypes';
 
 const Register = () => {
+  const { register } = useAuthContext();
   const navigate = useNavigate();
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [nombreCompleto, setNombreCompleto] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [usuario, setUsuario] = useState('');
+  const [contraseña, setContraseña] = useState('');
   const [error, setError] = useState<string | null>(null);
 
-  // Validación del formato del correo
-  const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Validaciones básicas
-    if (!fullName || !email || !username || !password) {
-      setError('Por favor, completa todos los campos.');
-      return;
+    try {
+      const newUser: UserType = { nombreCompleto, correo, usuario, contraseña };
+      await register(newUser);
+      alert('Registro exitoso');
+      navigate('/login');
+    } catch (err) {
+      setError('Error durante el registro');
     }
-
-    if (!validateEmail(email)) {
-      setError('El correo electrónico no es válido.');
-      return;
-    }
-
-    if (password.length < 6) {
-      setError('La contraseña debe tener al menos 6 caracteres.');
-      return;
-    }
-
-    const users: UserType[] = JSON.parse(localStorage.getItem('users') || '[]');
-    const userExists = users.some((user) => user.username === username);
-
-    if (userExists) {
-      setError('El nombre de usuario ya está en uso.');
-      return;
-    }
-
-    // Si todo es válido, registramos al usuario en localStorage
-    const newUser: UserType = { fullName, email, username, password };
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
-
-    alert('Registro exitoso. Ahora inicia sesión.');
-    navigate('/login');
   };
 
   return (
@@ -61,18 +35,18 @@ const Register = () => {
             <input
               type="text"
               className="w-full px-4 py-2 border rounded"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              value={nombreCompleto}
+              onChange={(e) => setNombreCompleto(e.target.value)}
               required
             />
           </div>
           <div className="mb-4">
-            <label className="block mb-2 text-sm">Correo Electrónico</label>
+            <label className="block mb-2 text-sm">Correo</label>
             <input
               type="email"
               className="w-full px-4 py-2 border rounded"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={correo}
+              onChange={(e) => setCorreo(e.target.value)}
               required
             />
           </div>
@@ -81,8 +55,8 @@ const Register = () => {
             <input
               type="text"
               className="w-full px-4 py-2 border rounded"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
               required
             />
           </div>
@@ -91,8 +65,8 @@ const Register = () => {
             <input
               type="password"
               className="w-full px-4 py-2 border rounded"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={contraseña}
+              onChange={(e) => setContraseña(e.target.value)}
               required
             />
           </div>

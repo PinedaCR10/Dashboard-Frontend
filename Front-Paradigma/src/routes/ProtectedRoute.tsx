@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from './AuthContext';
+import { useAuthContext } from './AuthContext'; // Usa el hook correcto
 
 interface ProtectedRouteProps {
   children: ReactNode;
 }
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuthContext();
   const location = useLocation();
 
   if (!isAuthenticated) {
