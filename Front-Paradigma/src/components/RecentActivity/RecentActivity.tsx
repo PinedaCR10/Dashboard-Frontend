@@ -1,23 +1,18 @@
+import DataStatus from "../../error/error";
 import { useGetAllActivity } from "../../hooks/useGetAllActivity";
 import { Activity } from "../../types/ActivityType";
-import { FaUser, FaBox, FaCalendarAlt, FaClock, FaClipboardList } from 'react-icons/fa';
+import { FaUser, 
+  FaBox,
+   FaCalendarAlt, 
+   FaClock,
+    FaClipboardList
+     } from 'react-icons/fa';
 
 const RecentActivity = () => {
   const { data, loading, error } = useGetAllActivity();
 
-  if (loading) {
-    return <p className="text-center text-blue-600">Cargando actividades recientes...</p>;
-  }
-
-  if (error) {
-    return <p className="text-center text-red-600">{error}</p>;
-  }
-
-  if (!data || data.length === 0) {
-    return <p className="text-center text-gray-500">No se encontraron actividades recientes.</p>;
-  }
-
   return (
+    <DataStatus loading={loading} error={error} data={data}>
     <div>
       <h2 className="text-xl font-bold mb-4 text-gray-800">Última Actividad</h2>
       <ul className="divide-y divide-gray-200">
@@ -49,6 +44,7 @@ const RecentActivity = () => {
         ))}
       </ul>
     </div>
+    </DataStatus>
   );
 };
 
