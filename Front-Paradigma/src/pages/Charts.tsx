@@ -1,18 +1,12 @@
+import DataStatus from "../error/error";
 import { useGetAllChartData } from "../hooks/useGetAllChartData";
 import Header from "../layout/Header";
 
 export const Charts = () => {
   const { data, loading, error } = useGetAllChartData(); 
 
-  if (loading) {
-    return <p>Cargando datos...</p>;
-  }
-
-  if (error) {
-    return <p>{error}</p>;
-  }
-
   return (
+    <DataStatus loading={loading} error={error} data={data}>
     <div className="min-h-screen bg-gray-50">
       <Header />
       <div className="container mx-auto p-6 md:px-8 lg:px-16 ">
@@ -46,5 +40,6 @@ export const Charts = () => {
         </div>
       </div>
     </div>
+    </DataStatus>
   );
 };
