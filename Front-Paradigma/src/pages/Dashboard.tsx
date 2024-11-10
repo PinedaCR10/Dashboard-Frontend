@@ -9,17 +9,11 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
+import DataStatus from "../error/error";
 
 export const Dashboard = () => {
   const { data, loading, error } = useGetAllChartData();
 
-  if (loading) {
-    return <p>Cargando datos...</p>;
-  }
-
-  if (error) {
-    return <p>{error}</p>;
-  }
 
   const formattedData = data.map((item) => ({
     ...item,
@@ -27,6 +21,7 @@ export const Dashboard = () => {
   }));
 
   return (
+    <DataStatus loading={loading} error={error} data={data}>
     <div className="min-h-screen bg-gray-50">
       <Header />
       <div className="container mx-auto p-8 md:px-8 lg:px-16">
@@ -47,5 +42,6 @@ export const Dashboard = () => {
         </div>
       </div>
     </div>
+    </DataStatus>
   );
 };

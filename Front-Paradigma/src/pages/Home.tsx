@@ -1,5 +1,4 @@
 import NavigationPanel from "../components/NativationPanel/NativationPanel"
-import RecentActivity from "../components/RecentActivity/RecentActivity"
 import SummaryCards from "../components/SummaryCards/SummaryCards"
 import WelcomeBanner from "../components/WelcomeBanner/WelcomeBanner"
 import Header from "../layout/Header"
@@ -12,7 +11,6 @@ const Home = () => {
         <WelcomeBanner/>
         <NavigationPanel />
         <SummaryCards />
-        <RecentActivity />
     </div>
   )
 }

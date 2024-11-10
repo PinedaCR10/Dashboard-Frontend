@@ -6,16 +6,16 @@ import { UserType } from '../types/authTypes';
 const Register = () => {
   const { register } = useAuthContext();
   const navigate = useNavigate();
-  const [nombreCompleto, setNombreCompleto] = useState('');
-  const [correo, setCorreo] = useState('');
-  const [usuario, setUsuario] = useState('');
-  const [contraseña, setContraseña] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const newUser: UserType = { nombreCompleto, correo, usuario, contraseña };
+      const newUser: UserType = { fullName, email, username, password };
       await register(newUser);
       alert('Registro exitoso');
       navigate('/login');
@@ -35,8 +35,8 @@ const Register = () => {
             <input
               type="text"
               className="w-full px-4 py-2 border rounded"
-              value={nombreCompleto}
-              onChange={(e) => setNombreCompleto(e.target.value)}
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
               required
             />
           </div>
@@ -45,8 +45,8 @@ const Register = () => {
             <input
               type="email"
               className="w-full px-4 py-2 border rounded"
-              value={correo}
-              onChange={(e) => setCorreo(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -55,8 +55,8 @@ const Register = () => {
             <input
               type="text"
               className="w-full px-4 py-2 border rounded"
-              value={usuario}
-              onChange={(e) => setUsuario(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
             />
           </div>
@@ -65,8 +65,8 @@ const Register = () => {
             <input
               type="password"
               className="w-full px-4 py-2 border rounded"
-              value={contraseña}
-              onChange={(e) => setContraseña(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
