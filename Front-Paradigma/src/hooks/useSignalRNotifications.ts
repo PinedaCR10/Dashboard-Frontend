@@ -1,4 +1,3 @@
-// hooks/useSignalRNotifications.ts
 import { useEffect, useState } from 'react';
 import { HubConnection } from '@microsoft/signalr';
 import { createConnection, startConnection, stopConnection } from '../services/signalRService';
@@ -14,7 +13,6 @@ const useSignalRNotifications = (HUB_URL: string) => {
         startConnection(connect);
 
         return () => {
-           
             stopConnection(connect);
         };
     }, []);
@@ -23,6 +21,9 @@ const useSignalRNotifications = (HUB_URL: string) => {
         if (connection) {
             connection.on("ReceiveNotification", (message: string) => {
                 setMessages(prevMessages => [...prevMessages, message]);
+
+                // Aquí puedes agregar lógica para refrescar los datos
+                // Por ejemplo, podrías llamar a funciones de fetch de datos para actualizar los hooks
             });
         }
 
