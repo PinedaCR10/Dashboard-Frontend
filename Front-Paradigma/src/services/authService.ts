@@ -1,28 +1,41 @@
 import { UserType } from "../types/authTypes";
 
-
 // URL base para la API
-const BASE_URL = 'https://670f22de3e7151861656a966.mockapi.io/api/v1/Usuarios';
+const Login = 'https://localhost:7230/api/Auth/login';
 
 // Función para manejar el login
-export const loginUser = async (usuario: string, contraseña: string): Promise<UserType | null> => {
+export const loginUser = async (username: string, password: string) => {
   try {
-    const response = await fetch(BASE_URL);
-    const users: UserType[] = await response.json();
+    const response = await fetch(Login, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password }) // Envía los datos en el cuerpo de la solicitud
+    });
 
-    // Filtramos el usuario por 'usuario' y 'contraseña'
-    const user = users.find((u) => u.usuario === usuario && u.contraseña === contraseña);
-    return user || null;
+    if (!response.ok) {
+      // Maneja errores de respuesta HTTP no exitosos
+      const errorText = await response.text();
+      throw new Error(errorText || 'Error en la solicitud de login');
+    }
+
+    const user = await response.json();
+    return user; // Devuelve el usuario en caso de éxito
   } catch (error) {
     console.error('Error durante el login:', error);
     return null;
   }
 };
 
+
+
+//register
+const Register = 'https://localhost:7230/api/Auth/register';
 // Función para manejar el registro de un nuevo usuario
 export const registerUser = async (newUser: UserType): Promise<boolean> => {
   try {
-    const response = await fetch(BASE_URL, {
+    const response = await fetch(Register, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

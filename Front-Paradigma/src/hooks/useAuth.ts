@@ -11,8 +11,8 @@ export const useAuth = () => {
   }, []);
 
   // Función para manejar el login
-  const login = async (usuario: string, contraseña: string): Promise<void> => {
-    const user = await loginUser(usuario, contraseña);
+  const login = async (username: string, password: string): Promise<void> => {
+    const user = await loginUser(username, password);
     if (user) {
       localStorage.setItem('authToken', 'exampleToken'); // Guardamos el token
       setIsAuthenticated(true);
