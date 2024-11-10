@@ -1,18 +1,16 @@
-
 import * as signalR from '@microsoft/signalr';
 
-
-export const HUB_URL = "https://localhost:7230/notificationsurlprueba";   
-
+export const HUB_URL = "https://localhost:7230/notifications";
 
 export const createConnection = () => {
     const connection = new signalR.HubConnectionBuilder()
-        .withUrl(HUB_URL)
+        .withUrl(HUB_URL, {
+            accessTokenFactory: () => localStorage.getItem('authToken') || ''
+        })
         .withAutomaticReconnect()
         .build();
     return connection;
 };
-
 
 export const startConnection = async (connection: signalR.HubConnection) => {
     try {
@@ -22,7 +20,6 @@ export const startConnection = async (connection: signalR.HubConnection) => {
         console.error("Error al conectar con SignalR:", err);
     }
 };
-
 
 export const stopConnection = async (connection: signalR.HubConnection) => {
     try {
