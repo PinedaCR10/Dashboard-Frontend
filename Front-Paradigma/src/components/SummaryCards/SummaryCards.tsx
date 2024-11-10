@@ -1,10 +1,21 @@
+import { useEffect } from 'react';
 import { FaShoppingCart, FaUser, FaDollarSign, FaCheckCircle, FaHourglassHalf } from 'react-icons/fa';
 import { useGetAllSummary } from '../../hooks/useGetAllSummary';
 import DataStatus from '../../error/error';
+import useSignalRNotifications from '../../hooks/useSignalRNotifications';
 
+const HUB_URL = 'https://localhost:7230/notifications';
 
 const SummaryCards = () => {
-  const { data, loading, error } = useGetAllSummary();
+  const { data, loading, error, fetchData } = useGetAllSummary();
+  const { messages } = useSignalRNotifications(HUB_URL);
+
+  // Llama a fetchData cada vez que se recibe una nueva notificación
+  useEffect(() => {
+    if (messages.length > 0) {
+      fetchData();
+    }
+  }, [messages, fetchData]);
 
   // Verifica que `data` esté definido y no esté vacío
   const summaryData = Array.isArray(data) && data.length > 0 ? data[0] : null;
