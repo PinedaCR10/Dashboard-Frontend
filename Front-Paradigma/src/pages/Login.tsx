@@ -18,7 +18,7 @@ const Login = () => {
       
       // Redirigimos al usuario al home tras el login exitoso
       navigate('/home', { replace: true }); 
-    } catch (err) {
+    } catch  {
       setError('Credenciales inválidas');
     }
   };
