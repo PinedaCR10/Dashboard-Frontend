@@ -48,6 +48,8 @@ const Header = () => {
           <Link to="/charts" className="flex items-center text-white" onClick={toggleMenu}>
             <FaChartBar className="mr-2" /> Charts
           </Link>
+         
+
         </nav>
       </div>
     </div>

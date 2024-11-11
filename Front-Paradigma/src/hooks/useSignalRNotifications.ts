@@ -1,40 +1,59 @@
 import { useEffect, useState } from 'react';
-import { HubConnection } from '@microsoft/signalr';
-import { createConnection, startConnection, stopConnection } from '../services/signalRService';
+import { 
+    createConnection, 
+    startConnection, 
+    stopConnection, 
+    sendMessage, 
+    onReceiveMessage, 
+    offReceiveMessage, 
+    onReceiveSalesData, 
+    offReceiveSalesData 
+} from '../services/signalRService';
 
-const useSignalRNotifications = (HUB_URL: string) => {
-    const [connection, setConnection] = useState<HubConnection | null>(null);
+type SalesData = {
+    id: number;
+    producto: string;
+    cantidad: number;
+    precio: number;
+    fecha: string;
+};
+
+const useChat = () => {
     const [messages, setMessages] = useState<string[]>([]);
+    const [salesData, setSalesData] = useState<SalesData | null>(null);
 
     useEffect(() => {
-        const connect = createConnection();
-        setConnection(connect);
+        // Crear y configurar la conexión
+        createConnection();
 
-        startConnection(connect);
+        // Iniciar la conexión
+        startConnection();
 
+        // Escuchar el evento "ReceiveMessage" para mensajes de chat
+        onReceiveMessage((message: string) => {
+            setMessages(prevMessages => [...prevMessages, message]);
+        });
+
+        // Escuchar el evento "ReceiveSalesData" para recibir datos de ventas
+        onReceiveSalesData((data: SalesData) => {
+            setSalesData(data);
+            console.log("Datos de ventas recibidos:", data);
+        });
+
+        // Limpiar la conexión al desmontar el componente
         return () => {
-            stopConnection(connect);
+            offReceiveMessage();
+            offReceiveSalesData();
+            stopConnection();
         };
     }, []);
 
-    useEffect(() => {
-        if (connection) {
-            connection.on("ReceiveNotification", (message: string) => {
-                setMessages(prevMessages => [...prevMessages, message]);
+    // Función para enviar mensajes
+    const handleSendMessage = async (message: string) => {
+        await sendMessage(message);
+    };
 
-                // Aquí puedes agregar lógica para refrescar los datos
-                // Por ejemplo, podrías llamar a funciones de fetch de datos para actualizar los hooks
-            });
-        }
-
-        return () => {
-            if (connection) {
-                connection.off("ReceiveNotification");
-            }
-        };
-    }, [connection]);
-
-    return { messages };
+    return { messages, salesData, sendMessage: handleSendMessage };
 };
 
-export default useSignalRNotifications;
+export default useChat;

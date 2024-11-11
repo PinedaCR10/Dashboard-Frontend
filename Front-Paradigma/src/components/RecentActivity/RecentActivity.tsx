@@ -1,49 +1,49 @@
 import DataStatus from "../../error/error";
 import { useGetAllActivity } from "../../hooks/useGetAllActivity";
-import { Activity } from "../../types/ActivityType";
-import { FaUser, 
-  FaBox,
-   FaCalendarAlt, 
-   FaClock,
-    FaClipboardList
-     } from 'react-icons/fa';
+import { FaUser, FaBox, FaCalendarAlt, FaClock, FaClipboardList } from 'react-icons/fa';
+import useChat from '../../hooks/useSignalRNotifications';
 
 const RecentActivity = () => {
   const { data, loading, error } = useGetAllActivity();
+  const { salesData } = useChat(); // Agregar el hook `useChat` para obtener `salesData`
 
   return (
     <DataStatus loading={loading} error={error} data={data}>
-    <div>
-      <h2 className="text-xl font-bold mb-4 text-gray-800">Última Actividad</h2>
-      <ul className="divide-y divide-gray-200">
-        {data.map((activity: Activity) => (
-          <li key={activity.id} className="py-4 flex space-x-4 items-center">
+      <div>
+        <h2 className="text-xl font-bold mt-8 text-gray-800">Datos de Ventas en Tiempo Real</h2>
+        {salesData ? (
+          <div className="py-4 flex space-x-4 items-center mt-4 bg-gray-100 rounded-lg shadow-md p-4">
             <div className="p-3 rounded-full bg-blue-100 text-blue-500 shadow-md">
               <FaUser className="text-xl" />
             </div>
             <div className="flex-1">
-              <p className="text-gray-800 font-semibold"><strong>Usuario:</strong> {activity.user}</p>
+              <p className="text-gray-800 font-semibold"><strong>ID:</strong> {salesData.id}</p>
               <p className="text-gray-600 flex items-center mt-1">
                 <FaBox className="mr-2 text-blue-500" /> 
-                <span><strong>Producto:</strong> {activity.product}</span>
+                <span><strong>Producto:</strong> {salesData.producto}</span>
               </p>
               <p className="text-gray-600 flex items-center mt-1">
                 <FaClipboardList className="mr-2 text-yellow-500" /> 
-                <span><strong>Orden #:</strong> {activity.order}</span>
+                <span><strong>Cantidad:</strong> {salesData.cantidad}</span>
               </p>
               <p className="text-gray-600 flex items-center mt-1">
                 <FaCalendarAlt className="mr-2 text-green-500" /> 
-                <span><strong>Fecha:</strong> {activity.date}</span>
+                <span><strong>Fecha:</strong> {new Date(salesData.fecha).toLocaleDateString()}</span>
               </p>
               <p className="text-gray-600 flex items-center mt-1">
                 <FaClock className="mr-2 text-purple-500" /> 
-                <span><strong>Hora:</strong> {activity.hour} hrs</span>
+                <span><strong>Hora:</strong> {new Date(salesData.fecha).toLocaleTimeString()}</span>
+              </p>
+              <p className="text-gray-600 flex items-center mt-1">
+                <FaBox className="mr-2 text-red-500" /> 
+                <span><strong>Precio:</strong> {salesData.precio}</span>
               </p>
             </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+          </div>
+        ) : (
+          <p className="text-gray-600 mt-4">No hay datos de ventas disponibles</p>
+        )}
+      </div>
     </DataStatus>
   );
 };

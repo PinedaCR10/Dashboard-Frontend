@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { FaShoppingCart, FaUser, FaDollarSign, FaCheckCircle, FaHourglassHalf } from 'react-icons/fa';
+import { FaShoppingCart, FaUser, FaDollarSign, FaCheckCircle } from 'react-icons/fa';
 import { useGetAllSummary } from '../../hooks/useGetAllSummary';
 import DataStatus from '../../error/error';
 import useSignalRNotifications from '../../hooks/useSignalRNotifications';
@@ -42,17 +42,6 @@ const SummaryCards = () => {
               <div>
                 <h2 className="text-xl font-semibold">Órdenes Completadas</h2>
                 <p className="text-2xl">{summaryData?.ordenesCompletadas}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Órdenes Pendientes */}
-          <div className="flex items-center justify-between p-4 rounded-lg shadow-lg bg-yellow-200">
-            <div className="flex items-center space-x-3">
-              <FaHourglassHalf className="text-3xl" />
-              <div>
-                <h2 className="text-xl font-semibold">Órdenes Pendientes</h2>
-                <p className="text-2xl">{summaryData?.ordenesPendientes}</p>
               </div>
             </div>
           </div>
