@@ -19,7 +19,7 @@ const Register = () => {
       await register(newUser);
       alert('Registro exitoso');
       navigate('/login');
-    } catch (err) {
+    } catch  {
       setError('Error durante el registro');
     }
   };
