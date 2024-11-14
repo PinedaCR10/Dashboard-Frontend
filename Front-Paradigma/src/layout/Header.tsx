@@ -5,17 +5,14 @@ import { FaBars, FaSignInAlt, FaHome, FaTachometerAlt, FaChartBar } from 'react-
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
- // const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
- // const handleLogin = () => {
- //   navigate('/login');
- // };
+
 
   const goToLogin = () => {
-    const rutaLogin = "https://eshop-loggin.vercel.app/"; // Reemplaza con la URL de tu login
-    const rutaFront = "https://dashboard-frontend-kohl.vercel.app/"; // Reemplaza con la URL del front de ellos
+    const rutaLogin = "https://eshop-loggin.vercel.app/"; 
+    const rutaFront = "https://dashboard-frontend-kohl.vercel.app/"; 
     window.location.href = `${rutaLogin}/?redirect=${encodeURIComponent(rutaFront)}`;
   };
  
