@@ -1,11 +1,11 @@
 import DataStatus from "../../error/error";
 import { useGetAllActivity } from "../../hooks/useGetAllActivity";
-import { FaUser, FaBox, FaCalendarAlt, FaClock, FaClipboardList } from 'react-icons/fa';
-import useChat from '../../hooks/useSignalRNotifications';
+import { FaUser, FaBox, FaCalendarAlt, FaClock } from 'react-icons/fa';
+import useSalesData from "../../hooks/useSignalRNotifications";
 
 const RecentActivity = () => {
   const { data, loading, error } = useGetAllActivity();
-  const { salesData } = useChat(); // Agregar el hook `useChat` para obtener `salesData`
+  const { salesData } = useSalesData();
 
   return (
     <DataStatus loading={loading} error={error} data={data}>
@@ -17,26 +17,23 @@ const RecentActivity = () => {
               <FaUser className="text-xl" />
             </div>
             <div className="flex-1">
-              <p className="text-gray-800 font-semibold"><strong>ID:</strong> {salesData.id}</p>
+              <p className="text-gray-800 font-semibold"><strong>ID:</strong> {salesData.Id}</p>
+              <p className="text-gray-800 font-semibold"><strong>AffiliateId:</strong> {salesData.Id}</p>
               <p className="text-gray-600 flex items-center mt-1">
                 <FaBox className="mr-2 text-blue-500" /> 
-                <span><strong>Producto:</strong> {salesData.producto}</span>
-              </p>
-              <p className="text-gray-600 flex items-center mt-1">
-                <FaClipboardList className="mr-2 text-yellow-500" /> 
-                <span><strong>Cantidad:</strong> {salesData.cantidad}</span>
+                <span><strong>Product:</strong> {salesData.Producto}</span>
               </p>
               <p className="text-gray-600 flex items-center mt-1">
                 <FaCalendarAlt className="mr-2 text-green-500" /> 
-                <span><strong>Fecha:</strong> {new Date(salesData.fecha).toLocaleDateString()}</span>
+                <span><strong>Date:</strong> {new Date(salesData.Fecha).toLocaleDateString()}</span>
               </p>
               <p className="text-gray-600 flex items-center mt-1">
                 <FaClock className="mr-2 text-purple-500" /> 
-                <span><strong>Hora:</strong> {new Date(salesData.fecha).toLocaleTimeString()}</span>
+                <span><strong>Hour:</strong> {new Date(salesData.Fecha).toLocaleTimeString()}</span>
               </p>
               <p className="text-gray-600 flex items-center mt-1">
                 <FaBox className="mr-2 text-red-500" /> 
-                <span><strong>Precio:</strong> {salesData.precio}</span>
+                <span><strong>Price:</strong> ${salesData.Precio}</span>
               </p>
             </div>
           </div>

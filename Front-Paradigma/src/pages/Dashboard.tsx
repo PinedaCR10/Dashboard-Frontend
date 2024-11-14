@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import DataStatus from "../error/error";
 
-export const Dashboard = () => {
+export const Dashboards = () => {
   const { data, loading, error } = useGetAllChartData();
 
 

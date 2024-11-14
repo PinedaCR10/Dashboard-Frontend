@@ -3,22 +3,15 @@ import {
     createConnection, 
     startConnection, 
     stopConnection, 
-    sendMessage, 
+    sendSalesData, // Cambiado para enviar datos de ventas específicamente
     onReceiveMessage, 
     offReceiveMessage, 
     onReceiveSalesData, 
     offReceiveSalesData 
 } from '../services/signalRService';
+import { SalesData } from '../types/SignalRType';
 
-type SalesData = {
-    id: number;
-    producto: string;
-    cantidad: number;
-    precio: number;
-    fecha: string;
-};
-
-const useChat = () => {
+const useSalesData = () => {
     const [messages, setMessages] = useState<string[]>([]);
     const [salesData, setSalesData] = useState<SalesData | null>(null);
 
@@ -48,12 +41,12 @@ const useChat = () => {
         };
     }, []);
 
-    // Función para enviar mensajes
-    const handleSendMessage = async (message: string) => {
-        await sendMessage(message);
+    // Función para enviar datos de ventas
+    const handleSendSalesData = async (data: SalesData) => {
+        await sendSalesData(data);
     };
 
-    return { messages, salesData, sendMessage: handleSendMessage };
+    return { messages, salesData, sendSalesData: handleSendSalesData };
 };
 
-export default useChat;
+export default useSalesData;
