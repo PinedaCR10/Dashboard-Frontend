@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaBars, FaSignInAlt, FaSignOutAlt, FaHome, FaTachometerAlt, FaChartBar } from 'react-icons/fa';
-import { useAuthContext } from '../routes/AuthContext';
+import { FaBars, FaSignInAlt, FaHome, FaTachometerAlt, FaChartBar } from 'react-icons/fa';
+
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, logout } = useAuthContext();
   const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -14,10 +13,7 @@ const Header = () => {
     navigate('/login');
   };
 
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
+ 
 
   return (
     <div className="relative flex justify-between items-center p-4 bg-blue-950 shadow-md">
@@ -27,9 +23,9 @@ const Header = () => {
 
       <button
         className="text-white text-2xl z-20"
-        onClick={isAuthenticated ? handleLogout : handleLogin}
+        onClick={handleLogin}
       >
-        {isAuthenticated ? <FaSignOutAlt /> : <FaSignInAlt />}
+        <FaSignInAlt />
       </button>
 
       <div
