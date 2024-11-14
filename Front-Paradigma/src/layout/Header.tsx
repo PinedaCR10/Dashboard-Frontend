@@ -1,18 +1,23 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaBars, FaSignInAlt, FaHome, FaTachometerAlt, FaChartBar } from 'react-icons/fa';
 
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
+ // const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const handleLogin = () => {
-    navigate('/login');
-  };
+ // const handleLogin = () => {
+ //   navigate('/login');
+ // };
 
+  const goToLogin = () => {
+    const rutaLogin = "https://eshop-loggin.vercel.app/"; // Reemplaza con la URL de tu login
+    const rutaFront = "http://localhost:5174/"; // Reemplaza con la URL del front de ellos
+    window.location.href = `${rutaLogin}/?redirect=${encodeURIComponent(rutaFront)}`;
+  };
  
 
   return (
@@ -23,7 +28,7 @@ const Header = () => {
 
       <button
         className="text-white text-2xl z-20"
-        onClick={handleLogin}
+        onClick={goToLogin}
       >
         <FaSignInAlt />
       </button>
