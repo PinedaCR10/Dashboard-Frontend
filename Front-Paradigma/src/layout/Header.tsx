@@ -15,7 +15,7 @@ const Header = () => {
 
   const goToLogin = () => {
     const rutaLogin = "https://eshop-loggin.vercel.app/"; // Reemplaza con la URL de tu login
-    const rutaFront = "http://localhost:5174/"; // Reemplaza con la URL del front de ellos
+    const rutaFront = "https://dashboard-frontend-kohl.vercel.app/"; // Reemplaza con la URL del front de ellos
     window.location.href = `${rutaLogin}/?redirect=${encodeURIComponent(rutaFront)}`;
   };
  
