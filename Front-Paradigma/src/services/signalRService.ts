@@ -8,7 +8,7 @@ let connection: signalR.HubConnection | null = null;
  */
 export const createConnection = () => {
     connection = new signalR.HubConnectionBuilder()
-        .withUrl("https://localhost:7230/hub/Saleshub") // Asegúrate de que coincida con el nombre del hub en el backend
+        .withUrl("https://dashboard-backend-fbjo.onrender.com/hub/Saleshub") // Asegúrate de que coincida con el nombre del hub en el backend
         .withAutomaticReconnect() // Reconexión automática en caso de pérdida de conexión
         .build();
     return connection;
