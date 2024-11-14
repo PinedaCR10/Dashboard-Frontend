@@ -4,8 +4,9 @@
     let connection: signalR.HubConnection | null = null;
 
     export const createConnection = () => {
+        const signalRUrl = import.meta.env.VITE_API_SIGNALR_URL;
         connection = new signalR.HubConnectionBuilder()
-            .withUrl("https://dashboard-backend-fbjo.onrender.com/hub/Saleshub", {
+            .withUrl(`${signalRUrl}/hub/Saleshub`, {
                 withCredentials: true // Agrega esta opción si necesitas enviar cookies o autenticación
             })
             .withAutomaticReconnect() // Reconexión automática en caso de pérdida de conexión
