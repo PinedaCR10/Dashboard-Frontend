@@ -4,7 +4,7 @@ import { FaSpinner, FaExclamationCircle, FaInfoCircle } from 'react-icons/fa';
 interface DataStatusProps {
   loading: boolean;
   error: string | null;
-  data: any; 
+  data: unknown[]; // Cambiado de any a unknown[]
   children: ReactNode;
 }
 

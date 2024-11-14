@@ -1,14 +1,12 @@
-import DataStatus from "../../error/error";
-import { useGetAllActivity } from "../../hooks/useGetAllActivity";
 import { FaUser, FaBox, FaCalendarAlt, FaClock } from 'react-icons/fa';
 import useSalesData from "../../hooks/useSignalRNotifications";
 
 const RecentActivity = () => {
-  const { data, loading, error } = useGetAllActivity();
+
   const { salesData } = useSalesData();
 
   return (
-    <DataStatus loading={loading} error={error} data={data}>
+    
       <div>
         <h2 className="text-xl font-bold mt-8 text-gray-800">Datos de Ventas en Tiempo Real</h2>
         {salesData ? (
@@ -41,7 +39,6 @@ const RecentActivity = () => {
           <p className="text-gray-600 mt-4">No hay datos de ventas disponibles</p>
         )}
       </div>
-    </DataStatus>
   );
 };
 

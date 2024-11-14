@@ -4,11 +4,9 @@ import { useGetAllSummary } from '../../hooks/useGetAllSummary';
 import DataStatus from '../../error/error';
 import useSignalRNotifications from '../../hooks/useSignalRNotifications';
 
-const HUB_URL = 'https://localhost:7230/notifications';
-
 const SummaryCards = () => {
   const { data, loading, error, fetchData } = useGetAllSummary();
-  const { messages } = useSignalRNotifications(HUB_URL);
+  const { messages } = useSignalRNotifications();
 
   // Llama a fetchData cada vez que se recibe una nueva notificación
   useEffect(() => {
