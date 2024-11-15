@@ -1,9 +1,7 @@
 import { FaUser, FaBox } from 'react-icons/fa';
-import useSalesData from '../../hooks/useSignalRNotifications';
+import { SalesData } from '../../types/SignalRType';
 
-const RecentActivity = () => {
-
-  const { salesData } = useSalesData();
+const RecentActivity = ( {salesData}: {salesData: SalesData | null} ) => {
 
   return (
     <div>
