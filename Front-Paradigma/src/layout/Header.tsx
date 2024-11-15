@@ -16,7 +16,6 @@ const Header = () => {
     window.location.href = `${rutaLogin}/?redirect=${encodeURIComponent(rutaFront)}`;
   };
  
-
   return (
     <div className="relative flex justify-between items-center p-4 bg-blue-950 shadow-md">
       <button className="text-3xl text-white z-20" onClick={toggleMenu}>

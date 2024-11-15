@@ -1,7 +1,19 @@
-// src/types/SalesData.ts
-export interface SimplifiedSalesData {
-    AffiliateId: string;
-    Name: string;
-    Price: number;
-    Description: string;
+// types.ts
+
+export interface Product {
+  Id: string;
+  Name: string;
+  Description: string;
+  Price: number;
+  Category: string;
+  Stock: number;
+  AffiliateId: string;
+}
+
+export interface SalesData {
+  Id: string;
+  ProductId: string;
+  Product: Product;
+  AffiliateId: string;
+  CardId: string;
 }
