@@ -1,5 +1,5 @@
     import * as signalR from '@microsoft/signalr';
-    import { SalesData } from '../types/SignalRType'; 
+    import { SimplifiedSalesData } from '../types/SignalRType'; 
 
     let connection: signalR.HubConnection | null = null;
 
@@ -40,10 +40,10 @@
      * Envía datos de ventas al backend.
      * @param salesData Los datos de ventas que se enviarán al backend.
      */
-    export const sendSalesData = async (salesData: SalesData) => {
+    export const sendSalesData = async (simplifiedsalesData: SimplifiedSalesData) => {
         if (connection) {
             try {
-                await connection.invoke("SendSalesData", salesData); // Asegúrate de que "SendSalesData" esté en tu Hub backend
+                await connection.invoke("SendSalesData", simplifiedsalesData); // Asegúrate de que "SendSalesData" esté en tu Hub backend
             } catch (err) {
                 console.error("Error al enviar datos de ventas:", err);
             }
@@ -54,7 +54,7 @@
      * Suscribe una función callback para recibir datos de ventas desde SignalR.
      * @param callback Función que se ejecutará cuando se reciba un mensaje de datos de ventas.
      */
-    export const onReceiveSalesData = (callback: (data: SalesData) => void) => {
+    export const onReceiveSalesData = (callback: (data: SimplifiedSalesData) => void) => {
         if (connection) {
             connection.on("ReceiveSalesData", callback);
         }

@@ -9,11 +9,11 @@ import {
     onReceiveSalesData, 
     offReceiveSalesData 
 } from '../services/signalRService';
-import { SalesData } from '../types/SignalRType';
+import { SimplifiedSalesData } from '../types/SignalRType';
 
 const useSalesData = () => {
     const [messages, setMessages] = useState<string[]>([]);
-    const [salesData, setSalesData] = useState<SalesData | null>(null);
+    const [salesData, setSalesData] = useState<SimplifiedSalesData | null>(null);
 
     useEffect(() => {
         // Crear y configurar la conexión
@@ -28,7 +28,7 @@ const useSalesData = () => {
         });
 
         // Escuchar el evento "ReceiveSalesData" para recibir datos de ventas
-        onReceiveSalesData((data: SalesData) => {
+        onReceiveSalesData((data: SimplifiedSalesData) => {
             setSalesData(data);
             console.log("Datos de ventas recibidos:", data);
         });
@@ -42,7 +42,7 @@ const useSalesData = () => {
     }, []);
 
     // Función para enviar datos de ventas
-    const handleSendSalesData = async (data: SalesData) => {
+    const handleSendSalesData = async (data: SimplifiedSalesData) => {
         await sendSalesData(data);
     };
 
