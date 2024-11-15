@@ -3,7 +3,7 @@ import { useState } from 'react';
 import RecentActivity from '../RecentActivity/RecentActivity';
 import useSalesData from '../../hooks/useSignalRNotifications';
 
-export const NativationPanel = () => {
+export const NavigationPanel = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { salesData } = useSalesData(); // Obtenemos salesData del hook
 
