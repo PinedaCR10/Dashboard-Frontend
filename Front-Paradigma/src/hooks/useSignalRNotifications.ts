@@ -24,9 +24,13 @@ const useSalesData = () => {
         });
     
         onReceiveSalesData((data: SalesData) => {
-            setSalesData(data);
-            console.log("Actualización de salesData en hook:", data); // Verifica que salesData se actualice aquí
+            if (data && data.Product && data.Product.Name) {
+                setSalesData(data);
+            } else {
+                console.warn("Datos de ventas incompletos:", data);
+            }
         });
+        
     
         return () => {
             offReceiveMessage();

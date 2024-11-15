@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import RecentActivity from '../RecentActivity/RecentActivity';
 
+
 const NavigationPanel = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -26,7 +28,7 @@ const NavigationPanel = () => {
               ✕
             </button>
             <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Última Actividad</h2>
-            <RecentActivity />
+            <RecentActivity  />
           </div>
         </div>
       )}
