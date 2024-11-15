@@ -1,4 +1,4 @@
-import { FaUser, FaBox, FaCalendarAlt, FaClock } from 'react-icons/fa';
+import { FaUser, FaBox } from 'react-icons/fa';
 import useSalesData from "../../hooks/useSignalRNotifications";
 
 const RecentActivity = () => {
@@ -15,23 +15,19 @@ const RecentActivity = () => {
               <FaUser className="text-xl" />
             </div>
             <div className="flex-1">
-              <p className="text-gray-800 font-semibold"><strong>ID:</strong> {salesData.Id}</p>
-              <p className="text-gray-800 font-semibold"><strong>AffiliateId:</strong> {salesData.Id}</p>
+              
+              <p className="text-gray-800 font-semibold"><strong>AffiliateId:</strong> {salesData.AffiliateId}</p>
               <p className="text-gray-600 flex items-center mt-1">
                 <FaBox className="mr-2 text-blue-500" /> 
-                <span><strong>Product:</strong> {salesData.Producto}</span>
-              </p>
-              <p className="text-gray-600 flex items-center mt-1">
-                <FaCalendarAlt className="mr-2 text-green-500" /> 
-                <span><strong>Date:</strong> {new Date(salesData.Fecha).toLocaleDateString()}</span>
-              </p>
-              <p className="text-gray-600 flex items-center mt-1">
-                <FaClock className="mr-2 text-purple-500" /> 
-                <span><strong>Hour:</strong> {new Date(salesData.Fecha).toLocaleTimeString()}</span>
+                <span><strong>Name:</strong> {salesData.Name}</span>
               </p>
               <p className="text-gray-600 flex items-center mt-1">
                 <FaBox className="mr-2 text-red-500" /> 
-                <span><strong>Price:</strong> ${salesData.Precio}</span>
+                <span><strong>Description:</strong> {salesData.Description}</span>
+              </p>
+              <p className="text-gray-600 flex items-center mt-1">
+                <FaBox className="mr-2 text-red-500" /> 
+                <span><strong>Price:</strong> ${salesData.Price}</span>
               </p>
             </div>
           </div>
