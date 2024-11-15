@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { FaUser, FaBox } from 'react-icons/fa';
 import useSalesData from "../../hooks/useSignalRNotifications";
 
-const RecentActivity = () => {
+const RecentActivity = ( ) => {
   const { salesData } = useSalesData();
 
   useEffect(() => {
