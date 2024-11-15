@@ -17,31 +17,35 @@ const RecentActivity = () => {
             <p className="text-gray-800 font-semibold"><strong>CardId:</strong> {salesData.CardId}</p>
             <p className="text-gray-800 font-semibold"><strong>ProductId:</strong> {salesData.ProductId}</p>
 
-            <h3 className="text-lg font-bold mt-4 text-gray-700">Producto</h3>
-            <p className="text-gray-600 flex items-center mt-1">
-              <FaBox className="mr-2 text-blue-500" /> 
-              <span><strong>Product Name:</strong> {salesData.Product.Name}</span>
-            </p>
-            <p className="text-gray-600 flex items-center mt-1">
-              <FaBox className="mr-2 text-red-500" /> 
-              <span><strong>Description:</strong> {salesData.Product.Description}</span>
-            </p>
-            <p className="text-gray-600 flex items-center mt-1">
-              <FaBox className="mr-2 text-green-500" /> 
-              <span><strong>Price:</strong> ${salesData.Product.Price.toFixed(2)}</span>
-            </p>
-            <p className="text-gray-600 flex items-center mt-1">
-              <FaBox className="mr-2 text-yellow-500" /> 
-              <span><strong>Category:</strong> {salesData.Product.Category}</span>
-            </p>
-            <p className="text-gray-600 flex items-center mt-1">
-              <FaBox className="mr-2 text-purple-500" /> 
-              <span><strong>Stock:</strong> {salesData.Product.Stock}</span>
-            </p>
-            <p className="text-gray-600 flex items-center mt-1">
-              <FaBox className="mr-2 text-indigo-500" /> 
-              <span><strong>Product AffiliateId:</strong> {salesData.Product.AffiliateId}</span>
-            </p>
+            {salesData.Product && (
+              <>
+                <h3 className="text-lg font-bold mt-4 text-gray-700">Producto</h3>
+                <p className="text-gray-600 flex items-center mt-1">
+                  <FaBox className="mr-2 text-blue-500" /> 
+                  <span><strong>Product Name:</strong> {salesData.Product.Name}</span>
+                </p>
+                <p className="text-gray-600 flex items-center mt-1">
+                  <FaBox className="mr-2 text-red-500" /> 
+                  <span><strong>Description:</strong> {salesData.Product.Description}</span>
+                </p>
+                <p className="text-gray-600 flex items-center mt-1">
+                  <FaBox className="mr-2 text-green-500" /> 
+                  <span><strong>Price:</strong> ${salesData.Product.Price.toFixed(2)}</span>
+                </p>
+                <p className="text-gray-600 flex items-center mt-1">
+                  <FaBox className="mr-2 text-yellow-500" /> 
+                  <span><strong>Category:</strong> {salesData.Product.Category}</span>
+                </p>
+                <p className="text-gray-600 flex items-center mt-1">
+                  <FaBox className="mr-2 text-purple-500" /> 
+                  <span><strong>Stock:</strong> {salesData.Product.Stock}</span>
+                </p>
+                <p className="text-gray-600 flex items-center mt-1">
+                  <FaBox className="mr-2 text-indigo-500" /> 
+                  <span><strong>Product AffiliateId:</strong> {salesData.Product.AffiliateId}</span>
+                </p>
+              </>
+            )}
           </div>
         </div>
       ) : (
