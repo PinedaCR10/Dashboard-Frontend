@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
 import { FaUser, FaBox } from 'react-icons/fa';
 import useSalesData from "../../hooks/useSignalRNotifications";
 
 const RecentActivity = () => {
   const { salesData } = useSalesData();
+
+  useEffect(() => {
+    console.log("Renderizando RecentActivity con salesData:", salesData);
+  }, [salesData]); // Ejecuta este efecto cada vez que salesData cambie
 
   return (
     <div>

@@ -18,16 +18,16 @@ const useSalesData = () => {
     useEffect(() => {
         createConnection();
         startConnection();
-
+    
         onReceiveMessage((message: string) => {
             setMessages(prevMessages => [...prevMessages, message]);
         });
-
+    
         onReceiveSalesData((data: SalesData) => {
             setSalesData(data);
-            console.log("Datos de ventas recibidos:", data);
+            console.log("Actualización de salesData en hook:", data); // Verifica que salesData se actualice aquí
         });
-
+    
         return () => {
             offReceiveMessage();
             offReceiveSalesData();
