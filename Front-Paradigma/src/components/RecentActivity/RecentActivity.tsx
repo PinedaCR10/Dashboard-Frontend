@@ -1,13 +1,9 @@
-import { useEffect } from 'react';
 import { FaUser, FaBox } from 'react-icons/fa';
-import useSalesData from "../../hooks/useSignalRNotifications";
+import useSalesData from '../../hooks/useSignalRNotifications';
 
-const RecentActivity = ( ) => {
+const RecentActivity = () => {
+
   const { salesData } = useSalesData();
-
-  useEffect(() => {
-    console.log("Renderizando RecentActivity con salesData:", salesData);
-  }, [salesData]); // Ejecuta este efecto cada vez que salesData cambie
 
   return (
     <div>
@@ -18,38 +14,40 @@ const RecentActivity = ( ) => {
             <FaUser className="text-xl" />
           </div>
           <div className="flex-1">
-            <p className="text-gray-800 font-semibold"><strong>AffiliateId:</strong> {salesData.AffiliateId}</p>
-            <p className="text-gray-800 font-semibold"><strong>CardId:</strong> {salesData.CardId}</p>
-            <p className="text-gray-800 font-semibold"><strong>ProductId:</strong> {salesData.ProductId}</p>
+            <p className="text-gray-800 font-semibold"><strong>AffiliateId:</strong> {salesData.AffiliateId || "No disponible"}</p>
+            <p className="text-gray-800 font-semibold"><strong>CardId:</strong> {salesData.CardId || "No disponible"}</p>
+            <p className="text-gray-800 font-semibold"><strong>ProductId:</strong> {salesData.ProductId || "No disponible"}</p>
 
-            {salesData.Product && (
+            {salesData.Product ? (
               <>
                 <h3 className="text-lg font-bold mt-4 text-gray-700">Producto</h3>
                 <p className="text-gray-600 flex items-center mt-1">
                   <FaBox className="mr-2 text-blue-500" /> 
-                  <span><strong>Product Name:</strong> {salesData.Product.Name}</span>
+                  <span><strong>Product Name:</strong> {salesData.Product.Name || "No disponible"}</span>
                 </p>
                 <p className="text-gray-600 flex items-center mt-1">
                   <FaBox className="mr-2 text-red-500" /> 
-                  <span><strong>Description:</strong> {salesData.Product.Description}</span>
+                  <span><strong>Description:</strong> {salesData.Product.Description || "No disponible"}</span>
                 </p>
                 <p className="text-gray-600 flex items-center mt-1">
                   <FaBox className="mr-2 text-green-500" /> 
-                  <span><strong>Price:</strong> ${salesData.Product.Price.toFixed(2)}</span>
+                  <span><strong>Price:</strong> ${salesData.Product.Price ? salesData.Product.Price.toFixed(2) : "No disponible"}</span>
                 </p>
                 <p className="text-gray-600 flex items-center mt-1">
                   <FaBox className="mr-2 text-yellow-500" /> 
-                  <span><strong>Category:</strong> {salesData.Product.Category}</span>
+                  <span><strong>Category:</strong> {salesData.Product.Category || "No disponible"}</span>
                 </p>
                 <p className="text-gray-600 flex items-center mt-1">
                   <FaBox className="mr-2 text-purple-500" /> 
-                  <span><strong>Stock:</strong> {salesData.Product.Stock}</span>
+                  <span><strong>Stock:</strong> {salesData.Product.Stock || "No disponible"}</span>
                 </p>
                 <p className="text-gray-600 flex items-center mt-1">
                   <FaBox className="mr-2 text-indigo-500" /> 
-                  <span><strong>Product AffiliateId:</strong> {salesData.Product.AffiliateId}</span>
+                  <span><strong>Product AffiliateId:</strong> {salesData.Product.AffiliateId || "No disponible"}</span>
                 </p>
               </>
+            ) : (
+              <p className="text-gray-600 mt-4">Información de producto no disponible</p>
             )}
           </div>
         </div>

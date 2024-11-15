@@ -18,20 +18,16 @@ const useSalesData = () => {
     useEffect(() => {
         createConnection();
         startConnection();
-    
+
         onReceiveMessage((message: string) => {
             setMessages(prevMessages => [...prevMessages, message]);
         });
-    
+
         onReceiveSalesData((data: SalesData) => {
-            if (data && data.Product && data.Product.Name) {
-                setSalesData(data);
-            } else {
-                console.warn("Datos de ventas incompletos:", data);
-            }
+            console.log("Datos de ventas recibidos:", data); // Verificar qué datos llegan
+            setSalesData(data);
         });
-        
-    
+
         return () => {
             offReceiveMessage();
             offReceiveSalesData();
