@@ -1,11 +1,8 @@
-const getJwtToken = () => {
-    const jwtCookie = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("jwt=")) // Busca la cookie con clave "jwt"
-      ?.split("=")[1]; // Extrae el valor del token
-  
-    return jwtCookie || null;
+const getTokenFromUrl = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token"); // Busca el parámetro "token"
+    return token;
   };
   
-  console.log("Token JWT:", getJwtToken());
+  console.log("Token desde la URL:", getTokenFromUrl());
   
