@@ -1,19 +1,13 @@
+// App.tsx
 import { useState } from 'react';
 import { RecentActivity } from '../RecentActivity/RecentActivity';
 import useSalesData from '../../hooks/useSignalRHub';
 
 export const NavigationPanel = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { salesData } = useSalesData();
+    const { salesData } = useSalesData(); // Obtenemos salesData del hook
 
-    const openModal = () => {
-        if (salesData) {
-            setIsModalOpen(true);
-        } else {
-            console.warn('No hay datos disponibles para mostrar.');
-        }
-    };
-
+    const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
     return (
@@ -35,7 +29,7 @@ export const NavigationPanel = () => {
                             ✕
                         </button>
                         <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Última Actividad</h2>
-                        <RecentActivity salesData={salesData} />
+                        <RecentActivity salesData={salesData} /> {/* Pasamos salesData a RecentActivity */}
                     </div>
                 </div>
             )}
