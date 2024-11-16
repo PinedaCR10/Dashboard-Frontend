@@ -1,29 +1,45 @@
 import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import NoAuth from "../../auth/NoAuth";
 
 
 const Protected = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const jwtCookie = document.cookie
+  const getTokenFromUrl = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get("token");
+  };
+
+  const getTokenFromCookies = () => {
+    return document.cookie
       .split("; ")
       .find((row) => row.startsWith("jwt="))
       ?.split("=")[1];
+  };
 
-    if (!jwtCookie) {
+  useEffect(() => {
+    const token = getTokenFromUrl() || getTokenFromCookies();
+
+    if (!token) {
       setIsAuthenticated(false);
       return;
     }
 
     try {
-      const decodedToken: any = jwtDecode(jwtCookie);
-      const isValid = decodedToken.exp * 1000 > Date.now(); // Verificar expiración
-      setIsAuthenticated(isValid);
-    } catch (error) {
-      console.error("Error decoding JWT:", error);
+      const decoded: any = jwtDecode(token);
+      const currentTime = Date.now() / 1000; // Tiempo actual en segundos
+
+      if (decoded.exp && decoded.exp < currentTime) {
+        console.error("Token expirado");
+        setIsAuthenticated(false);
+      } else {
+        setIsAuthenticated(true);
+      }
+    } catch (err) {
+      console.error("Error al decodificar el token:", err);
       setIsAuthenticated(false);
     }
   }, []);
@@ -33,8 +49,7 @@ const Protected = ({ children }: { children: React.ReactNode }) => {
   }
 
   if (!isAuthenticated) {
-    navigate("/noauth");
-    return null;
+    return <NoAuth />;
   }
 
   return <>{children}</>;
