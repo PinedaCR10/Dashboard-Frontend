@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { FaShoppingCart, FaUser, FaDollarSign, FaCheckCircle } from 'react-icons/fa';
 import { useGetAllSummary } from '../../hooks/useGetAllSummary';
 import DataStatus from '../../error/error';
-import useSignalRNotifications from '../../hooks/useSignalRNotifications';
+import useSignalRNotifications from '../../hooks/useSignalRHub';
 
 const SummaryCards = () => {
   const { data, loading, error, fetchData } = useGetAllSummary();
