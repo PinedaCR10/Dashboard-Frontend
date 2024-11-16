@@ -12,21 +12,43 @@ const useSalesData = () => {
     const [salesData, setSalesData] = useState<SalesData | null>(null);
 
     useEffect(() => {
-        // Inicia la conexión de SignalR
-        startConnection();
+        if (import.meta.env.MODE === 'development') {
+            // Simula datos en modo desarrollo
+            const mockData: SalesData = {
+                Id: "1",
+                ProductId: "101",
+                AffiliateId: "201",
+                CardId: "301",
+                Product: {
+                    Id: "101",
+                    Name: "Producto Prueba",
+                    Description: "Descripción de prueba",
+                    Price: 99.99,
+                    Category: "Categoría Prueba",
+                    Stock: 10,
+                    AffiliateId: "201",
+                },
+            };
 
-        // Suscribe la recepción de datos
-        onReceiveSalesData((data: SalesData) => {
-            console.log('Datos de ventas recibidos:', data);
-            setSalesData(data);
-        });
+            setTimeout(() => {
+                console.log("Datos de prueba asignados a salesData.");
+                setSalesData(mockData);
+            }, 3000); // Simula un retraso de 3 segundos
+        } else {
+            // Comportamiento real para SignalR
+            startConnection();
 
-        // Cleanup al desmontar el componente
-        return () => {
-            offReceiveSalesData();
-            stopConnection();
-        };
-    }, []); // El efecto se ejecuta una vez al montar
+            onReceiveSalesData((data: SalesData) => {
+                console.log('Datos de ventas recibidos:', data);
+                setSalesData(data);
+            });
+
+            return () => {
+                offReceiveSalesData();
+                stopConnection();
+            };
+        }
+    }, []);
 
     const handleSendSalesData = async (data: SalesData) => {
         await sendSalesData(data);
