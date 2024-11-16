@@ -2,7 +2,7 @@
 import { FaUser, FaBox } from 'react-icons/fa';
 import { SalesData } from '../../types/SignalRType';
 
-const RecentActivity = ( {salesData}: {salesData: SalesData | null} ) => {
+export const RecentActivity = ( {salesData}: {salesData: SalesData | null} ) => {
   console.log("Datos en RecentActivity:", salesData); // Verifica si los datos llegan aquí
 
   return (
@@ -58,4 +58,3 @@ const RecentActivity = ( {salesData}: {salesData: SalesData | null} ) => {
   );
 };
 
-export default RecentActivity;

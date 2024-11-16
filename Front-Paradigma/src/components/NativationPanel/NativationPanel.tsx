@@ -1,7 +1,7 @@
 // App.tsx
 import { useState } from 'react';
-import RecentActivity from '../RecentActivity/RecentActivity';
-import useSalesData from '../../hooks/useSignalRNotifications';
+import { RecentActivity } from '../RecentActivity/RecentActivity';
+import useSalesData from '../../hooks/useSignalRHub';
 
 export const NavigationPanel = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
