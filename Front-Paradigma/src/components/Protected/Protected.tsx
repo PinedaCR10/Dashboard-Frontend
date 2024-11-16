@@ -36,7 +36,9 @@ const Protected = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const tokenFromUrl = getTokenFromUrl();
+    console.log("Token en la URL:", tokenFromUrl); /////////
     const tokenFromCookies = getTokenFromCookies();
+  
 
     // Si el token viene en la URL, guárdalo en las cookies y limpia la URL
     if (tokenFromUrl) {
