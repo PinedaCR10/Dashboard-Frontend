@@ -1,31 +1,42 @@
+import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
-import NoAuth from "../../auth/NoAuth";
+import { useNavigate } from "react-router-dom";
 
-// Asegúrate de importar el componente
 
 const Protected = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const authCookie = document.cookie
+    const jwtCookie = document.cookie
       .split("; ")
-      .find((row) => row.startsWith("rw.authenticated="))
+      .find((row) => row.startsWith("jwt="))
       ?.split("=")[1];
 
-    setIsAuthenticated(authCookie === "true");
+    if (!jwtCookie) {
+      setIsAuthenticated(false);
+      return;
+    }
+
+    try {
+      const decodedToken: any = jwtDecode(jwtCookie);
+      const isValid = decodedToken.exp * 1000 > Date.now(); // Verificar expiración
+      setIsAuthenticated(isValid);
+    } catch (error) {
+      console.error("Error decoding JWT:", error);
+      setIsAuthenticated(false);
+    }
   }, []);
 
-  // Mientras verificamos la autenticación
   if (isAuthenticated === null) {
     return <div>Cargando...</div>;
   }
 
-  // Si no está autenticado, mostrar NoAuth
   if (!isAuthenticated) {
-    return <NoAuth />;
+    navigate("/noauth");
+    return null;
   }
 
-  // Si está autenticado, renderizar el contenido protegido
   return <>{children}</>;
 };
 

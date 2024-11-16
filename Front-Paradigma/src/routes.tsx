@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import { Charts } from './pages/Charts';
 import { Dashboards } from './pages/Dashboard';
 import Protected from './components/Protected/Protected';
+import NoAuth from './auth/NoAuth';
 
 export const router = createBrowserRouter([
   {
@@ -25,4 +26,10 @@ export const router = createBrowserRouter([
       </Protected>
     ),
   },
+{
+  path: '/noauth',
+  element: (
+    <NoAuth/>
+  ),
+},
 ]);
