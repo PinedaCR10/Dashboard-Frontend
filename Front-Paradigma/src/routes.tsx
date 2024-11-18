@@ -9,7 +9,11 @@ import Callback from './components/Protected/Callback';
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />,
+    
+    element:
+    <Protected>
+       <Home />
+    </Protected>,
   },
   {
     path: '/charts',
