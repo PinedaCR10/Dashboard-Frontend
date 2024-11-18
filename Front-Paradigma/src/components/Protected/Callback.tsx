@@ -12,13 +12,11 @@ const Callback = () => {
     const token = urlParams.get("token");
 
     if (token) {
-      // Guardar el estado de autenticación y los datos del usuario
-      setAuthStatus(true); // Actualiza el estado global
-      localStorage.setItem("isLogged", "true");
+      // Procesar token y guardar estado de autenticación
+      setAuthStatus(true);
       localStorage.setItem("currentUser", JSON.stringify({ name: "Aaron", cedula: "504500..." }));
 
       // Limpiar la URL
-      urlParams.delete("token");
       window.history.replaceState({}, document.title, window.location.pathname);
 
       // Redirigir al dashboard
