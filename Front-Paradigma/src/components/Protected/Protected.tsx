@@ -1,16 +1,20 @@
 import React from "react";
-import { useAuth } from "../../routes/AuthContext";
-
+import NoAuth from "../../auth/NoAuth";
+// Importa el componente para manejar usuarios no autorizados
 
 const Protected = ({ children }: { children: React.ReactNode }) => {
-  const { isLogged } = useAuth();
+  // Obtener el token desde la URL o localStorage
+  const token = new URLSearchParams(window.location.search).get("token") || localStorage.getItem("authToken");
 
-  if (!isLogged) {
-    // Redirigir al login si el usuario no está autenticado
-    const loginUrl = "https://eshop-loggin.vercel.app/";
-    const redirectUrl = "https://dashboard-frontend-kohl.vercel.app/";
-    window.location.href = `${loginUrl}?redirect=${encodeURIComponent(redirectUrl)}`;
-    return null;
+  if (!token) {
+    // Mostrar componente de "No autorizado" si no hay token
+    return <NoAuth />;
+  }
+
+  // Si el token viene en la URL, guardarlo en localStorage
+  if (!localStorage.getItem("authToken") && token) {
+    localStorage.setItem("authToken", token);
+    window.history.replaceState({}, document.title, window.location.pathname); // Limpiar la URL
   }
 
   return <>{children}</>;
