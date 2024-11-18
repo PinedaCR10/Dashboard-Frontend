@@ -1,5 +1,4 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
 import { useAuth } from "../../routes/AuthContext";
 
 
@@ -8,7 +7,10 @@ const Protected = ({ children }: { children: React.ReactNode }) => {
 
   if (!isLogged) {
     // Redirigir al login si el usuario no está autenticado
-    return <Navigate to="/noauth" replace />;
+    const loginUrl = "https://eshop-loggin.vercel.app/";
+    const redirectUrl = "https://dashboard-frontend-kohl.vercel.app/";
+    window.location.href = `${loginUrl}?redirect=${encodeURIComponent(redirectUrl)}`;
+    return null;
   }
 
   return <>{children}</>;
