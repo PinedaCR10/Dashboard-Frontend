@@ -2,18 +2,19 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../routes/AuthContext";
 
-
 const Callback = () => {
   const navigate = useNavigate();
-  const { setAuthStatus } = useAuth();
+  const { login } = useAuth();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
 
     if (token) {
-      // Procesar token y guardar estado de autenticación
-      setAuthStatus(true);
+      // Configurar autenticación
+      login();
+
+      // Opcional: guardar más información en localStorage
       localStorage.setItem("currentUser", JSON.stringify({ name: "Aaron", cedula: "504500..." }));
 
       // Limpiar la URL
@@ -27,9 +28,9 @@ const Callback = () => {
       const redirectUrl = "https://dashboard-frontend-kohl.vercel.app/";
       window.location.href = `${loginUrl}?redirect=${encodeURIComponent(redirectUrl)}`;
     }
-  }, [navigate, setAuthStatus]);
+  }, [navigate, login]);
 
-  return <div>Cargando autenticación...</div>;
+  return <div>Procesando autenticación...</div>;
 };
 
 export default Callback;
