@@ -11,14 +11,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
-    // Sincronizar estado con localStorage al iniciar
+    // Sincronizar el estado con localStorage
     const loggedIn = localStorage.getItem("isLogged") === "true";
     setIsLogged(loggedIn);
   }, []);
 
   const setAuthStatus = (status: boolean) => {
-    setIsLogged(status);
     localStorage.setItem("isLogged", status.toString());
+    setIsLogged(status);
   };
 
   return (
