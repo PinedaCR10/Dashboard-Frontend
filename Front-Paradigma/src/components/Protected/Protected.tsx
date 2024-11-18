@@ -11,6 +11,7 @@ const Protected = ({ children }: { children: React.ReactNode }) => {
     window.location.href = `${loginUrl}?redirect=${encodeURIComponent(redirectUrl)}`;
     return null; // Detén la renderización hasta que se redirija
   }
+  
 
   return <>{children}</>;
 };
