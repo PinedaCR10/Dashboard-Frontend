@@ -12,8 +12,9 @@ const Callback = () => {
     const token = urlParams.get("token");
 
     if (token) {
-      // Guardar estado de autenticación y datos del usuario
-      setAuthStatus(true);
+      // Guardar el estado de autenticación y los datos del usuario
+      setAuthStatus(true); // Actualiza el estado global
+      localStorage.setItem("isLogged", "true");
       localStorage.setItem("currentUser", JSON.stringify({ name: "Aaron", cedula: "504500..." }));
 
       // Limpiar la URL

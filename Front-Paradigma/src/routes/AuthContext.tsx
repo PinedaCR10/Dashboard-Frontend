@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
-    // Verificar el estado de autenticación desde localStorage
+    // Sincronizar estado con localStorage al iniciar
     const loggedIn = localStorage.getItem("isLogged") === "true";
     setIsLogged(loggedIn);
   }, []);
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error("useAuth debe ser usado dentro de un AuthProvider");
   }
   return context;
 };

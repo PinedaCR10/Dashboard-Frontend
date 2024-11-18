@@ -9,7 +9,7 @@ const Protected = ({ children }: { children: React.ReactNode }) => {
     const loginUrl = "https://eshop-loggin.vercel.app/";
     const redirectUrl = "https://dashboard-frontend-kohl.vercel.app/";
     window.location.href = `${loginUrl}?redirect=${encodeURIComponent(redirectUrl)}`;
-    return null; // Detener la renderización hasta que se redirija
+    return null;
   }
 
   return <>{children}</>;
