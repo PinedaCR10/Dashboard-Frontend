@@ -1,4 +1,4 @@
-export interface Product {
+export interface ProductData {
   Id: string;
   Name: string;
   Description: string;
@@ -8,10 +8,18 @@ export interface Product {
   AffiliateId: string;
 }
 
+export interface SimplifiedSalesData {
+  Name: string;
+  Description: string;
+  Price: number;
+  AffiliateId: string;
+  CardId: string;
+}
+
 export interface SalesData {
   Id: string;
   ProductId: string;
-  Product: Product;
+  Product: ProductData;
   AffiliateId: string;
   CardId: string;
 }
