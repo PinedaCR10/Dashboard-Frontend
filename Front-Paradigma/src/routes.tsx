@@ -4,16 +4,16 @@ import { Charts } from './pages/Charts';
 import { Dashboards } from './pages/Dashboard';
 import Protected from './components/Protected/Protected';
 import NoAuth from './auth/NoAuth';
-import Callback from './components/Protected/Callback';
+
 
 export const router = createBrowserRouter([
   {
     path: '/',
     
     element:
-    <Protected>
+   
        <Home />
-    </Protected>,
+ ,
   },
   {
     path: '/charts',
@@ -36,9 +36,5 @@ export const router = createBrowserRouter([
   element: (
     <NoAuth/>
   ),
-},
-{
-  path: '/callback',
-  element: <Callback />, // Ruta para procesar el token
 },
 ]);
