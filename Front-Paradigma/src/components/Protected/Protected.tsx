@@ -1,37 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import NoAuth from "../../auth/NoAuth";
+import React from "react";
+
 
 const Protected = ({ children }: { children: React.ReactNode }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-  const navigate = useNavigate();
+  const isLogged = localStorage.getItem("isLogged");
 
-  // Verificar el estado de autenticación desde localStorage
-  const checkAuthStatus = () => {
-    const isLogged = localStorage.getItem("isLogged");
-    return isLogged === "true"; // Verifica si es `true` como cadena
-  };
-
-  useEffect(() => {
-    if (checkAuthStatus()) {
-      setIsAuthenticated(true);
-    } else {
-      console.warn("El usuario no está autenticado.");
-      setIsAuthenticated(false);
-    }
-  }, []);
-
-  // Mostrar mientras se verifica el estado de autenticación
-  if (isAuthenticated === null) {
-    return <div>Cargando...</div>;
+  // Redirige al login si no está autenticado
+  if (isLogged !== "true") {
+    const loginUrl = "https://eshop-loggin.vercel.app/";
+    const redirectUrl = "https://dashboard-frontend-kohl.vercel.app/";
+    window.location.href = `${loginUrl}?redirect=${encodeURIComponent(redirectUrl)}`;
+    return null; // Detén la renderización hasta que se redirija
   }
 
-  // Redirigir a NoAuth si no está autenticado
-  if (!isAuthenticated) {
-    return <NoAuth />;
-  }
-
-  // Renderizar el contenido protegido si está autenticado
   return <>{children}</>;
 };
 
