@@ -1,45 +1,37 @@
 import { useEffect, useState } from 'react';
-import { 
-    createConnection, 
-    startConnection, 
-    stopConnection, 
-    sendSalesData, 
-    onReceiveMessage, 
-    offReceiveMessage, 
-    onReceiveSalesData, 
-    offReceiveSalesData 
-} from '../services/signalRService';
-import { SalesData } from '../types/SignalRType';
+import { createConnection, startConnection, stopConnection, onReceiveSalesData, offReceiveSalesData } from '../services/signalRService';
+import { SimplifiedSalesData } from '../types/SignalRType';
 
 const useSalesData = () => {
-    const [messages, setMessages] = useState<string[]>([]);
-    const [salesData, setSalesData] = useState<SalesData | null>(null);
+    const [salesData, setSalesData] = useState<SimplifiedSalesData | null>(null);
+    const [isConnected, setIsConnected] = useState<boolean>(false);
 
     useEffect(() => {
         createConnection();
-        startConnection();
+        startConnection()
+            .then(() => {
+                console.log("Conexión establecida con SignalR.");
+                setIsConnected(true);
+            })
+            .catch((err) => {
+                console.error("Error al conectar con SignalR:", err);
+                setIsConnected(false);
+            });
 
-        onReceiveMessage((message: string) => {
-            setMessages(prevMessages => [...prevMessages, message]);
-        });
-
-        onReceiveSalesData((data: SalesData) => {
-            console.log("Datos de ventas recibidos:", data); // Verificar qué datos llegan
+        onReceiveSalesData((data: SimplifiedSalesData) => {
+            console.log("Datos de ventas recibidos:", data);
             setSalesData(data);
         });
 
         return () => {
-            offReceiveMessage();
             offReceiveSalesData();
-            stopConnection();
+            stopConnection()
+                .then(() => console.log("Conexión de SignalR detenida."))
+                .catch((err) => console.error("Error al detener la conexión:", err));
         };
     }, []);
 
-    const handleSendSalesData = async (data: SalesData) => {
-        await sendSalesData(data);
-    };
-
-    return { messages, salesData, sendSalesData: handleSendSalesData };
+    return { salesData, isConnected };
 };
 
 export default useSalesData;

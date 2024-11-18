@@ -10,12 +10,12 @@ export const SummaryCards = () => {
 
   // Llama a fetchData cada vez que se recibe una nueva notificación
   useEffect(() => {
-    if (messages.length > 0) {
+    if (messages?.length > 0) {
       fetchData();
     }
   }, [messages, fetchData]);
 
-  // Verifica que data esté definido y no esté vacío
+  // Verifica que data esté definido y sea un array
   const summaryData = Array.isArray(data) && data.length > 0 ? data[0] : null;
 
   return (
@@ -28,7 +28,7 @@ export const SummaryCards = () => {
               <FaShoppingCart className="text-3xl" />
               <div>
                 <h2 className="text-xl font-semibold">Total de Ventas</h2>
-                <p className="text-2xl">{summaryData?.totalVentas}</p>
+                <p className="text-2xl">{summaryData?.totalVentas || 'N/A'}</p>
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@ export const SummaryCards = () => {
               <FaCheckCircle className="text-3xl" />
               <div>
                 <h2 className="text-xl font-semibold">Órdenes Completadas</h2>
-                <p className="text-2xl">{summaryData?.ordenesCompletadas}</p>
+                <p className="text-2xl">{summaryData?.ordenesCompletadas || 'N/A'}</p>
               </div>
             </div>
           </div>
@@ -50,7 +50,7 @@ export const SummaryCards = () => {
               <FaUser className="text-3xl" />
               <div>
                 <h2 className="text-xl font-semibold">Total de Usuarios</h2>
-                <p className="text-2xl">{summaryData?.totalUsuarios}</p>
+                <p className="text-2xl">{summaryData?.totalUsuarios || 'N/A'}</p>
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@ export const SummaryCards = () => {
               <FaDollarSign className="text-3xl" />
               <div>
                 <h2 className="text-xl font-semibold">Ingresos del Mes</h2>
-                <p className="text-2xl">${summaryData?.ingresosDelMes}</p>
+                <p className="text-2xl">${Number(summaryData?.ingresosDelMes).toFixed(2) || 'N/A'}</p>
               </div>
             </div>
           </div>
