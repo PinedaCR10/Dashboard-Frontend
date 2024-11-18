@@ -1,4 +1,12 @@
+import { useEffect } from "react";
+
 const NoAuth = () => {
+  useEffect(() => {
+    const loginUrl = "https://eshop-loggin.vercel.app/";
+    const redirectUrl = "https://dashboard-frontend-kohl.vercel.app/";
+    window.location.href = `${loginUrl}?redirect=${encodeURIComponent(redirectUrl)}`;
+  }, []);
+  
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="w-[700px] h-full pt-10 flex flex-col items-center">
