@@ -7,8 +7,9 @@ let connection: signalR.HubConnection | null = null;
  * Configura y crea la conexión SignalR.
  */
 export const createConnection = () => {
+    const signalRUrl = import.meta.env.VITE_API_SIGNALR_URL;
     connection = new signalR.HubConnectionBuilder()
-        .withUrl('https://localhost:7230/hub/DashboardHub') // Ajusta la URL a tu backend
+        .withUrl(`${signalRUrl}/hub/Saleshub`) 
         .withAutomaticReconnect()
         .build();
     return connection;
