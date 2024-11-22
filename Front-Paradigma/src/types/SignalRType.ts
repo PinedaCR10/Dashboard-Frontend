@@ -12,6 +12,8 @@ export interface SimplifiedSalesData {
   Name: string;
   Description: string;
   Price: number;
+  Amount :number;
+  PurchaseDate: string;
   AffiliateId: string;
   CardId: string;
 }
@@ -20,6 +22,7 @@ export interface SalesData {
   Id: string;
   ProductId: string;
   Product: ProductData;
+ 
   AffiliateId: string;
   CardId: string;
 }
