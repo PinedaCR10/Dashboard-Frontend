@@ -41,53 +41,62 @@ export const RecentActivity = ({
 
     return (
         <div>
-            <h2 className="text-xl font-bold mt-8 text-gray-800">Datos de Ventas en Tiempo Real</h2>
-            <div className="py-6 bg-gray-100 rounded-lg shadow-md p-6">
-                {/* Información General */}
-                <div className="mb-4">
-                    <p className="text-gray-800 font-semibold">
-                        <strong>AffiliateId:</strong> {AffiliateId || 'No disponible'}
-                    </p>
-                    <p className="text-gray-800 font-semibold">
-                        <strong>Fecha de Compra:</strong> {formatDate(PurchaseDate)}
-                    </p>
-                    <p className="text-gray-800 font-semibold">
-                        <strong>Estado:</strong> {Status === 1 ? 'Activo' : 'Inactivo'}
-                    </p>
-                    <p className="text-gray-800 font-semibold">
-                        <strong>Monto Total:</strong> {formatCurrency(Amount)}
-                    </p>
-                </div>
+    <h2 className="text-xl font-bold mt-8 text-gray-800">Datos de Ventas en Tiempo Real</h2>
+    <div className="py-6 bg-gray-100 rounded-lg shadow-md p-6">
+        {/* Información General */}
+        <div className="mb-4">
+            <p className="text-gray-800 font-semibold">
+                <strong>AffiliateId:</strong> {AffiliateId || 'No disponible'}
+            </p>
+            <p className="text-gray-800 font-semibold">
+                <strong>Fecha de Compra:</strong> {formatDate(PurchaseDate)}
+            </p>
+            <p className="text-gray-800 font-semibold">
+                <strong>Estado:</strong> {Status === 1 ? 'Activo' : 'Inactivo'}
+            </p>
+            <p className="text-gray-800 font-semibold">
+                <strong>Monto Total:</strong> {formatCurrency(Amount)}
+            </p>
+        </div>
 
-                {/* Lista de Productos */}
-                <div>
-                    <h3 className="text-lg font-bold text-gray-800 mb-4">Productos</h3>
-                    {Array.isArray(Products) && Products.length > 0 ? (
-                        Products.map((item, index) => (
-                            <div
-                                key={index}
-                                className="mb-4 py-4 px-4 bg-white rounded-md shadow-sm border"
-                            >
-                                <p className="text-gray-800 font-semibold">
-                                    <strong>Nombre del Producto:</strong> {item.Name || 'No disponible'}
-                                </p>
-                                <p className="text-gray-800 font-semibold">
-                                    <strong>Descripción:</strong> {item.Description || 'No disponible'}
-                                </p>
-                                <p className="text-gray-800 font-semibold">
-                                    <strong>Precio:</strong> {formatCurrency(item.Price)}
-                                </p>
-                                <p className="text-gray-800 font-semibold">
-                                    <strong>AffiliateId:</strong> {item.AffiliateId || 'No disponible'}
-                                </p>
-                            </div>
-                        ))
-                    ) : (
-                        <p className="text-gray-600">No hay productos disponibles.</p>
-                    )}
-                </div>
+        {/* Lista de Productos */}
+        <div>
+            <h3 className="text-lg font-bold text-gray-800 mb-4">Productos</h3>
+            <div
+                className="overflow-y-auto max-h-64"
+                style={{
+                    maxHeight: '250px', // Puedes ajustar esta altura
+                    overflowY: 'auto',
+                }}
+            >
+                {Array.isArray(Products) && Products.length > 0 ? (
+                    Products.map((item, index) => (
+                        <div
+                            key={index}
+                            className="mb-4 py-4 px-4 bg-white rounded-md shadow-sm border"
+                        >
+                            <p className="text-gray-800 font-semibold">
+                                <strong>Nombre del Producto:</strong> {item.Name || 'No disponible'}
+                            </p>
+                            <p className="text-gray-800 font-semibold">
+                                <strong>Descripción:</strong> {item.Description || 'No disponible'}
+                            </p>
+                            <p className="text-gray-800 font-semibold">
+                                <strong>Precio:</strong> {formatCurrency(item.Price)}
+                            </p>
+                            <p className="text-gray-800 font-semibold">
+                                <strong>AffiliateId:</strong> {item.AffiliateId || 'No disponible'}
+                            </p>
+                        </div>
+                    ))
+                ) : (
+                    <p className="text-gray-600">No hay productos disponibles.</p>
+                )}
             </div>
         </div>
+    </div>
+</div>
+
     );
 };
 

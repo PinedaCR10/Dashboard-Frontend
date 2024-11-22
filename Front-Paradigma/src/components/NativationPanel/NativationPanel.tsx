@@ -13,14 +13,16 @@ export const NavigationPanel = () => {
     return (
         <div>
             <div className="flex items-center space-x-2">
-                <button
-                    onClick={openModal}
-                    className="bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-blue-700 transform transition-transform duration-300 ease-in-out hover:scale-105"
-                >
-                    Ver Última Actividad
-                </button>
+                <div className="flex justify-center w-full">
+                    <button
+                        onClick={openModal}
+                        className="bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-blue-700 transform transition-transform duration-300 ease-in-out hover:scale-105"
+                    >
+                        Ver Última Actividad
+                    </button>
+                </div>
                 <div
-                    className={`w-4 h-4 rounded-full ${
+                    className={`w-4 h-4 rounded-full   ${
                         isConnected ? 'bg-green-500' : 'bg-red-500'
                     }`}
                     title={isConnected ? 'Conectado' : 'Desconectado'}
@@ -40,7 +42,7 @@ export const NavigationPanel = () => {
                             >
                                 ✕
                             </button>
-                            <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
+                            <h2 className="text-2xl font-bold text-gray-800 text-center mb-6 ">
                                 Última Actividad
                             </h2>
                             <RecentActivity salesData={salesData || null} />
