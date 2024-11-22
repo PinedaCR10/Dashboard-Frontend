@@ -12,7 +12,9 @@ export const router = createBrowserRouter([
     path: '/',
     element: (
       <TokenHandler>
+        <Protected>
         <Home />
+        </Protected>
       </TokenHandler>
     ),
   },
